@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Помічник адміністрації</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+overflow:hidden;
+}
+
+.sidebar{
+width:260px;
+padding:20px;
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(20px);
+border-right:1px solid rgba(255,255,255,.1);
+}
+
+.logo{
+font-size:24px;
+font-weight:700;
+text-align:center;
+margin-bottom:35px;
+}
+
+.menu-btn{
+width:100%;
+padding:14px;
+margin-bottom:12px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+font-size:15px;
+color:white;
+background:rgba(255,255,255,.08);
+transition:.3s;
+}
+
+.menu-btn:hover{
+transform:translateY(-2px);
+background:rgba(59,130,246,.6);
+}
+
+.active{
+background:linear-gradient(90deg,#3b82f6,#60a5fa);
+}
+
+.content{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:30px;
+}
+
+.card{
+width:500px;
+padding:28px;
+border-radius:28px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+box-shadow:
+0 10px 40px rgba(0,0,0,.35);
+}
+
+.card h2{
+text-align:center;
+margin-bottom:22px;
+}
+
+input,
+select{
+width:100%;
+padding:15px;
+margin-top:12px;
+border:none;
+border-radius:14px;
+outline:none;
+font-size:16px;
+color:white;
+background:rgba(255,255,255,.08);
+}
+
+option{
+color:black;
+}
+
+.calc-btn{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:14px;
+font-size:16px;
+cursor:pointer;
+color:white;
+background:linear-gradient(
+90deg,
+#3b82f6,
+#60a5fa
+);
+}
+
+.error{
+display:none;
+margin-top:15px;
+padding:14px;
+border-radius:14px;
+background:rgba(239,68,68,.2);
+}
+
+.result{
+display:none;
+margin-top:15px;
+}
+
+.result-box{
+
+padding:16px;
+border-radius:18px;
+background:rgba(255,255,255,.05);
+
+display:flex;
+flex-direction:column;
+gap:12px;
+
+}
+
+.result-item{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:13px;
+border-radius:14px;
+
+background:rgba(
+255,
+255,
+255,
+0.04
+);
+
+}
+
+.result-main{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:15px;
+border-radius:14px;
+
+background:rgba(
+59,
+130,
+246,
+0.20
+);
+
+border:1px solid rgba(
+59,
+130,
+246,
+0.3
+);
+
+}
+
+.dev{
+
+font-size:35px;
+opacity:.8;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+Помічник адміністрації
+</div>
+
+<button
+class="menu-btn active"
+onclick="showCalc(this)"
+>
+Калькулятор депозиту
+</button>
+
+<button
+class="menu-btn"
+onclick="showDev(this)"
+>
+В розробці
+</button>
+
+<button
+class="menu-btn"
+onclick="showDev(this)"
+>
+В розробці
+</button>
+
+<button
+class="menu-btn"
+onclick="showDev(this)"
+>
+В розробці
+</button>
+
+</div>
+
+<div class="content" id="content">
+
+<div class="card">
+
+<h2>
+Калькулятор депозиту
+</h2>
+
+<input
+id="amount"
+type="number"
+placeholder="Сума (₴)"
+>
+
+<select id="payday">
+
+<option value="0.06|5">
+5 PayDay — 0.06%
+</option>
+
+<option value="0.15|10">
+10 PayDay — 0.15%
+</option>
+
+<option value="0.3|20">
+20 PayDay — 0.3%
+</option>
+
+<option value="0.8|60">
+60 PayDay — 0.8%
+</option>
+
+</select>
+
+<button
+class="calc-btn"
+onclick="calculate()"
+>
+Розрахувати
+</button>
+
+<div
+id="error"
+class="error"
+></div>
+
+<div
+id="result"
+class="result"
+></div>
+
+</div>
+
+</div>
+
+<script>
+
+function activate(btn){
+
+document
+.querySelectorAll(".menu-btn")
+.forEach(
+x=>x.classList.remove("active")
+);
+
+btn.classList.add("active");
+
+}
+
+function showCalc(btn){
+
+activate(btn);
+
+location.reload();
+
+}
+
+function showDev(btn){
+
+activate(btn);
+
+document
+.getElementById("content")
+.innerHTML=`
+
+<div class="dev">
+🚧 В розробці
+</div>
+
+`;
+
+}
+
+function calculate(){
+
+let amount=
+Number(
+document.getElementById("amount").value
+);
+
+let error=
+document.getElementById("error");
+
+let result=
+document.getElementById("result");
+
+error.style.display="none";
+result.style.display="none";
+
+if(amount<1){
+
+error.innerText=
+"Мінімальна сума: 1₴";
+
+error.style.display="block";
+
+return;
+
+}
+
+if(amount>5000000){
+
+error.innerText=
+"Помилка: депозит не може бути більше 5 000 000₴";
+
+error.style.display="block";
+
+return;
+
+}
+
+let data=
+document
+.getElementById("payday")
+.value
+.split("|");
+
+let percent=
+Number(data[0]);
+
+let payday=
+Number(data[1]);
+
+let final=
+amount*
+Math.pow(
+1+(percent/100),
+payday
+);
+
+let profit=
+final-amount;
+
+result.innerHTML=`
+
+<div class="result-box">
+
+<div class="result-item">
+
+<span>
+💰 Початкова сума
+</span>
+
+<b>
+${amount.toLocaleString()}₴
+</b>
+
+</div>
+
+<div class="result-item">
+
+<span>
+📈 Чистий прибуток
+</span>
+
+<b>
++${Math.round(profit).toLocaleString()}₴
+</b>
+
+</div>
+
+<div class="result-main">
+
+<span>
+🏦 До зняття через ${payday} PayDay
+</span>
+
+<b>
+${Math.round(final).toLocaleString()}₴
+</b>
+
+</div>
+
+</div>
+
+`;
+
+result.style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
