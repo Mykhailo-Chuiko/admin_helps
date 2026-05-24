@@ -2,440 +2,909 @@
 <html lang="uk">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Помічник адміністрації</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Помічник адміністрації</title>
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-body {
-    height: 100vh;
-    display: flex;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    color: white;
-    overflow: hidden;
-}
+        body {
+            height: 100vh;
+            display: flex;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            overflow: hidden;
+        }
 
-.sidebar {
-    width: 260px;
-    padding: 20px;
-    background: rgba(255, 255, 255, .06);
-    backdrop-filter: blur(20px);
-    border-right: 1px solid rgba(255, 255, 255, .1);
-}
+        .sidebar {
+            width: 260px;
+            padding: 20px;
+            background: rgba(255, 255, 255, .06);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, .1);
+        }
 
-.logo {
-    font-size: 24px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 35px;
-}
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 35px;
+        }
 
-.menu-btn {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 12px;
-    border: none;
-    border-radius: 14px;
-    cursor: pointer;
-    font-size: 15px;
-    color: white;
-    background: rgba(255, 255, 255, .08);
-    transition: .3s;
-    text-align: left;
-    padding-left: 20px;
-}
+        .menu-btn {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 15px;
+            color: white;
+            background: rgba(255, 255, 255, .08);
+            transition: .3s;
+            text-align: left;
+            padding-left: 20px;
+        }
 
-.menu-btn:hover {
-    transform: translateY(-2px);
-    background: rgba(59, 130, 246, .6);
-}
+        .menu-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(59, 130, 246, .6);
+        }
 
-.active {
-    background: linear-gradient(90deg, #3b82f6, #60a5fa);
-}
+        .active {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        }
 
-.content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    overflow-y: auto;
-}
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            overflow-y: auto;
+        }
 
-.card {
-    width: 550px;
-    padding: 28px;
-    border-radius: 28px;
-    background: rgba(255, 255, 255, .08);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, .35);
-    display: none;
-}
+        .card {
+            width: 550px;
+            padding: 28px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, .08);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, .35);
+            display: none;
+        }
 
-.card.active-card {
-    display: block;
-}
+        .card.active-card {
+            display: block;
+        }
 
-.card h2 {
-    text-align: center;
-    margin-bottom: 22px;
-}
+        .card h2 {
+            text-align: center;
+            margin-bottom: 22px;
+        }
 
-.input-group {
-    margin-bottom: 15px;
-}
+        .input-group {
+            margin-bottom: 15px;
+        }
 
-label {
-    font-size: 14px;
-    color: #cbd5e1;
-    display: block;
-    margin-bottom: 5px;
-}
+        label {
+            font-size: 14px;
+            color: #cbd5e1;
+            display: block;
+            margin-bottom: 5px;
+        }
 
-input,
-select {
+        input {
     width: 100%;
     padding: 15px;
     border: none;
     outline: none;
     border-radius: 14px;
     font-size: 16px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255,255,255,0.08);
     color: white;
+}
+
+/* Сучасний select */
+select {
+    width: 100%;
+    padding: 15px 45px 15px 18px;
+    border: 1px solid rgba(255,255,255,.1);
+    outline: none;
+    border-radius: 16px;
+    font-size: 15px;
+    background:
+        linear-gradient(rgba(255,255,255,.06), rgba(255,255,255,.03)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M3.204 5h9.592L8 11 3.204 5z'/%3E%3C/svg%3E")
+        no-repeat right 15px center;
+    backdrop-filter: blur(20px);
+    color: white;
+    appearance: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+select:hover {
+    background-color: rgba(59,130,246,.08);
+    transform: translateY(-1px);
+}
+
+select:focus {
+    border: 1px solid rgba(59,130,246,.6);
+    box-shadow: 0 0 15px rgba(59,130,246,.25);
 }
 
 option {
-    color: black;
-}
-
-.calc-btn {
-    width: 100%;
-    padding: 15px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 14px;
-    font-size: 16px;
-    cursor: pointer;
-    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    background: #1e293b;
     color: white;
 }
 
-.error {
-    display: none;
-    margin-top: 15px;
-    padding: 14px;
-    border-radius: 14px;
-    background: rgba(239, 68, 68, 0.2);
-    border: 1px solid rgba(239, 68, 68, 0.4);
+        .calc-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            cursor: pointer;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            color: white;
+        }
+
+        .error {
+            display: none;
+            margin-top: 15px;
+            padding: 14px;
+            border-radius: 14px;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .result {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .result-box {
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .result-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-radius: 14px;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            font-size: 18px;
+        }
+
+        .dev {
+            font-size: 35px;
+            opacity: .7;
+            text-align: center;
+        }
+
+        /* Стилі для опису робіт та підвкладок */
+        .job-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .job-sub-btn {
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #cbd5e1;
+            font-size: 13px;
+            cursor: pointer;
+            transition: .2s;
+            text-align: center;
+        }
+
+        .job-sub-btn:hover {
+            background: rgba(59, 130, 246, 0.3);
+            color: white;
+        }
+
+        .job-sub-btn.active-sub-tab {
+            background: #3b82f6;
+            color: white;
+            font-weight: bold;
+        }
+
+        .job-info-container {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 18px;
+            border-radius: 14px;
+            min-height: 100px;
+            max-height: 320px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.6;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .job-section-title {
+            font-weight: bold;
+            color: #60a5fa;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 4px;
+            font-size: 15px;
+        }
+        .job-select{
+    width:100%;
+    padding:18px 50px 18px 20px;
+    font-size:16px;
+    font-weight:600;
+    color:white;
+
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+    135deg,
+    rgba(59,130,246,.25),
+    rgba(255,255,255,.05));
+
+    backdrop-filter:blur(20px);
+
+    appearance:none;
+    cursor:pointer;
+
+    transition:all .35s ease;
+
+    box-shadow:
+    inset 0 0 15px rgba(255,255,255,.03),
+    0 8px 25px rgba(0,0,0,.2);
+
+    background-image:
+    linear-gradient(
+    135deg,
+    rgba(59,130,246,.25),
+    rgba(255,255,255,.05)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M3.2 5h9.6L8 11 3.2 5z'/%3E%3C/svg%3E");
+
+    background-repeat:no-repeat;
+    background-position:right 18px center;
 }
 
-.result {
-    display: none;
-    margin-top: 15px;
+.job-select:hover{
+    transform:translateY(-3px);
+    box-shadow:
+    0 0 20px rgba(59,130,246,.25),
+    0 10px 30px rgba(0,0,0,.3);
 }
 
-.result-box {
-    padding: 16px;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.05);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.job-select:focus{
+    border:1px solid rgba(59,130,246,.7);
+    box-shadow:
+    0 0 25px rgba(59,130,246,.35);
 }
 
-.result-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 13px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.04);
+.job-select option{
+    height: 56px;
+    background:#1e293b;
+    color:white;
+}
+.job-select{
+    width:100%;
+    height:56px;
+    padding:0 50px 0 20px;
+    line-height:56px;
+    box-sizing:border-box;
+    font-size:16px;
+    font-weight:600;
+    color:white;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+    background:
+    linear-gradient(135deg,
+    rgba(59,130,246,.25),
+    rgba(255,255,255,.05));
+    backdrop-filter:blur(20px);
+    appearance:none;
+    cursor:pointer;
+    transition:all .25s ease;
+    box-shadow:
+    inset 0 0 15px rgba(255,255,255,.03),
+    0 8px 25px rgba(0,0,0,.2);
+    background-image:
+    linear-gradient(135deg,
+    rgba(59,130,246,.25),
+    rgba(255,255,255,.05)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M3.2 5h9.6L8 11 3.2 5z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 18px center;
 }
 
-.result-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
-    border-radius: 14px;
-    background: rgba(59, 130, 246, 0.2);
-    border: 1px solid rgba(59, 130, 246, 0.4);
-    font-size: 18px;
+.job-select:hover{
+    transform:none;
+    box-shadow:
+    0 0 20px rgba(59,130,246,.25),
+    0 10px 30px rgba(0,0,0,.3);
+}
+.card{
+    opacity:0;
+    transform:translateY(15px) scale(0.98);
+    transition:all .35s ease;
+    pointer-events:none;
 }
 
-.dev {
-    font-size: 35px;
-    opacity: .7;
-    text-align: center;
+.card.active-card{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
 }
-</style>
+.menu-btn{
+    position:relative;
+    overflow:hidden;
+}
+
+.menu-btn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);
+    transition:0.5s;
+}
+
+.menu-btn:hover::before{
+    left:100%;
+}
+.result{
+    opacity:0;
+    transform:translateY(10px) scale(0.98);
+    transition:all .35s ease;
+}
+
+.result.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+/* ===== MOBILE ADAPTATION ===== */
+@media (max-width: 768px) {
+
+    body {
+        flex-direction: column;
+        overflow: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .menu-btn {
+        width: 48%;
+        text-align: center;
+        padding-left: 0;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .job-tabs {
+        grid-template-columns: 1fr;
+    }
+
+    input, select {
+        font-size: 14px;
+    }
+
+    .logo {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}
+    </style>
 </head>
 
 <body>
 
-<div class="sidebar">
-    <div class="logo">Помічник</div>
-    
-    <button class="menu-btn active" onclick="switchTab('deposit', this)">
-        💰 Калькулятор депозиту
-    </button>
-    <button class="menu-btn" onclick="switchTab('incassator', this)">
-        🚚 Калькулятор інкасатора
-    </button>
-    <button class="menu-btn" onclick="switchTab('dev1', this)">
-        🚧 В розробці
-    </button>
-    <button class="menu-btn" onclick="switchTab('dev2', this)">
-        🚧 В розробці
-    </button>
-</div>
+    <div class="sidebar">
+        <div class="logo">Помічник</div>
 
-<div class="content" id="content">
-
-    <div id="deposit-card" class="card active-card">
-        <h2>Калькулятор депозиту</h2>
-        
-        <div class="input-group">
-            <input id="amount" type="number" placeholder="Сума депозиту (₴)">
-        </div>
-
-        <div class="input-group">
-            <select id="bankLevel">
-                <option value="1.5">1 lvl (+1.5%)</option>
-                <option value="3.5">2 lvl (+3.5%)</option>
-                <option value="6.5">3 lvl (+6.5%)</option>
-                <option value="10.5">4 lvl (+10.5%)</option>
-                <option value="15.5">5 lvl (+15.5%)</option>
-                <option value="21.5">6 lvl (+21.5%)</option>
-                <option value="28.5">7 lvl (+28.5%)</option>
-                <option value="36.5">8 lvl (+36.5%)</option>
-                <option value="43.5">9 lvl (+43.5%)</option>
-                <option value="50">10 lvl (+50%)</option>
-            </select>
-        </div>
-
-        <div class="input-group">
-            <select id="payday">
-                <option value="0.06|5">5 PayDay — 0.06%</option>
-                <option value="0.15|10">10 PayDay — 0.15%</option>
-                <option value="0.3|20">20 PayDay — 0.3%</option>
-                <option value="0.8|60">60 PayDay — 0.8%</option>
-            </select>
-        </div>
-
-        <button class="calc-btn" onclick="calculateDeposit()">Розрахувати</button>
-        <div id="deposit-error" class="error"></div>
-        <div id="deposit-result" class="result"></div>
+        <button class="menu-btn active" onclick="switchTab('deposit', this)">
+            💰 Калькулятор депозиту
+        </button>
+        <button class="menu-btn" onclick="switchTab('incassator', this)">
+            🚚 Калькулятор інкасатора
+        </button>
+        <button class="menu-btn" onclick="switchTab('jobs', this)">
+            💼 База робіт
+        </button>
+        <button class="menu-btn" onclick="switchTab('dev2', this)">
+            🚧 В розробці
+        </button>
     </div>
 
-    <div id="incassator-card" class="card">
-        <h2>Калькулятор інкасатора</h2>
-        
-        <div class="input-group">
-            <label>Поточний рівень банкінгу:</label>
-            <select id="currentLevel" onchange="updateTargetOptions()">
-                <option value="0">0 рівень</option>
-                <option value="1">1 рівень</option>
-                <option value="2">2 рівень</option>
-                <option value="3">3 рівень</option>
-                <option value="4">4 рівень</option>
-                <option value="5">5 рівень</option>
-                <option value="6">6 рівень</option>
-                <option value="7">7 рівень</option>
-                <option value="8">8 рівень</option>
-                <option value="9">9 рівень</option>
-            </select>
-        </div>
+    <div class="content" id="content">
 
-        <div class="input-group">
-            <label>Наявна кількість балів на цьому рівні:</label>
-            <input id="currentPoints" type="number" value="0" min="0" placeholder="Введіть бали">
-        </div>
+        <div id="deposit-card" class="card active-card">
+            <h2>Калькулятор депозиту</h2>
 
-        <div class="input-group">
-            <label>Бажаний рівень банкінгу:</label>
-            <select id="targetLevel">
+            <div class="input-group">
+                <input id="amount" type="number" placeholder="Сума депозиту (₴)">
+            </div>
+
+            <div class="input-group">
+                <select id="bankLevel">
+                    <option value="1.5">1 lvl (+1.5%)</option>
+                    <option value="3.5">2 lvl (+3.5%)</option>
+                    <option value="6.5">3 lvl (+6.5%)</option>
+                    <option value="10.5">4 lvl (+10.5%)</option>
+                    <option value="15.5">5 lvl (+15.5%)</option>
+                    <option value="21.5">6 lvl (+21.5%)</option>
+                    <option value="28.5">7 lvl (+28.5%)</option>
+                    <option value="36.5">8 lvl (+36.5%)</option>
+                    <option value="43.5">9 lvl (+43.5%)</option>
+                    <option value="50">10 lvl (+50%)</option>
                 </select>
+            </div>
+
+            <div class="input-group">
+                <select id="payday">
+                    <option value="0.06|5">5 PayDay — 0.06%</option>
+                    <option value="0.15|10">10 PayDay — 0.15%</option>
+                    <option value="0.3|20">20 PayDay — 0.3%</option>
+                    <option value="0.8|60">60 PayDay — 0.8%</option>
+                </select>
+            </div>
+
+            <button class="calc-btn" onclick="calculateDeposit()">Розрахувати</button>
+            <div id="deposit-error" class="error"></div>
+            <div id="deposit-result" class="result"></div>
         </div>
 
-        <div class="input-group">
-            <label>Поточний рівень компанії:</label>
-            <select id="companyLevel">
-                <option value="1">1 рівень (1 бал за рейс)</option>
-                <option value="3">2 рівень (3 бали за рейс)</option>
-                <option value="5">3 рівень (5 балів за рейс)</option>
-            </select>
+        <div id="incassator-card" class="card">
+            <h2>Калькулятор інкасатора</h2>
+
+            <div class="input-group">
+                <label>Поточний рівень банкінгу:</label>
+                <select id="currentLevel" onchange="updateTargetOptions()">
+                    <option value="0">0 рівень</option>
+                    <option value="1">1 рівень</option>
+                    <option value="2">2 рівень</option>
+                    <option value="3">3 рівень</option>
+                    <option value="4">4 рівень</option>
+                    <option value="5">5 рівень</option>
+                    <option value="6">6 рівень</option>
+                    <option value="7">7 рівень</option>
+                    <option value="8">8 рівень</option>
+                    <option value="9">9 рівень</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Наявна кількість балів на цьому рівні:</label>
+                <input id="currentPoints" type="number" value="0" min="0" placeholder="Введіть бали">
+            </div>
+
+            <div class="input-group">
+                <label>Бажаний рівень банкінгу:</label>
+                <select id="targetLevel"></select>
+            </div>
+
+            <div class="input-group">
+                <label>Поточний рівень компанії:</label>
+                <select id="companyLevel">
+                    <option value="1">1 рівень (1 бал за рейс)</option>
+                    <option value="3">2 рівень (3 бали за рейс)</option>
+                    <option value="5">3 рівень (5 балів за рейс)</option>
+                </select>
+            </div>
+
+            <button class="calc-btn" onclick="calculateIncassator()">Розрахувати рейси</button>
+            <div id="incassator-error" class="error"></div>
+            <div id="incassator-result" class="result"></div>
         </div>
 
-        <button class="calc-btn" onclick="calculateIncassator()">Розрахувати рейси</button>
-        <div id="incassator-error" class="error"></div>
-        <div id="incassator-result" class="result"></div>
+        <div id="jobs-card" class="card">
+            <h2>💼 Критерії професій</h2>
+            <div class="input-group">
+                <label>Оберіть роботу для перегляду:</label>
+                <select id="jobSelector" class="job-select" onchange="onJobSelected()">
+                    <option value="" disabled selected>-- 🔎Оберіть роботу --</option>
+                    <option value="glovo">1. Доставщик Glovo</option>
+                    <option value="diver">2. Водолаз</option>
+                    <option value="lumberjack">3. Лісоруб</option>
+                    <option value="sweeper">4. Очищувач вулиць</option>
+                    <option value="incas">5. Інкасатор</option>
+                    <option value="solar">6. Робота сонячних панелей</option>
+                    <option value="towtruck">7. Евакуатор</option>
+                    <option value="bus">8. Автобусник</option>
+                    <option value="farm">9. Ферма</option>
+                    <option value="taxi">10. Таксі</option>
+                    <option value="gas">11. Газова служба</option>
+                    <option value="builder">12. Будівельник</option>
+                    <option value="miner">13. Шахтар</option>
+                    <option value="captain">14. Капітан теплоходу</option>
+                    <option value="tram">15. Трамвай</option>
+                    <option value="thief">16. Викрадач авто</option>
+                    <option value="pilot">17. Робота пілота</option>
+                    <option value="loader">18. Навантажувач</option>
+                </select>
+            </div>
+
+            <div id="job-tabs-block" class="job-tabs" style="display: none;">
+                <button class="job-sub-btn" id="btn-essence" onclick="switchJobInfo('essence')">🎮 Суть роботи</button>
+                <button class="job-sub-btn" id="btn-earnings" onclick="switchJobInfo('earnings')">💰 Заробіток & Бонуси</button>
+                <button class="job-sub-btn" id="btn-reqs" onclick="switchJobInfo('reqs')">📋 Вимоги & Умови</button>
+                <button class="job-sub-btn" id="btn-location" onclick="switchJobInfo('location')">📍 Локація / Шлях</button>
+            </div>
+
+            <div id="job-details" class="job-info-container" style="display: none;"></div>
+        </div>
+
+        <div id="dev-card" class="card">
+            <div class="dev">🚧 В розробці</div>
+        </div>
+
     </div>
 
-    <div id="dev-card" class="card">
-        <div class="dev">🚧 В розробці</div>
-    </div>
+    <script>
+        // Таблиця балів та лімітів інкасатора
+        const incassatorData = {
+            0: { pointsRequired: 30, limit: "5 000 000" },
+            1: { pointsRequired: 60, limit: "10 000 000" },
+            2: { pointsRequired: 120, limit: "15 000 000" },
+            3: { pointsRequired: 180, limit: "20 000 000" },
+            4: { pointsRequired: 240, limit: "25 000 000" },
+            5: { pointsRequired: 360, limit: "30 000 000" },
+            6: { pointsRequired: 500, limit: "35 000 000" },
+            7: { pointsRequired: 650, limit: "40 000 000" },
+            8: { pointsRequired: 800, limit: "50 000 000" },
+            9: { pointsRequired: 1000, limit: "60 000 000" },
+            10: { pointsRequired: 0, limit: "75 000 000" }
+        };
 
-</div>
+        // Структурована база даних про роботи
+        const jobsDatabase = {
+            glovo: {
+                essence: `• Доставка замовлень по місту клієнтам.<br>•`,
+                earnings: `• 💵 Заробітня залежить від вашого ігрового рівня персонажа.`,
+                reqs: `• Мати мінімум 3-й ігровий рівень.<br>• Обов'язково купити рюкзак кур'єра (Ціна: 12 500 грн).<br>• Водійські права: Категорія B (для авто) або Категорія A (для мотоцикла).<br>⚠️ Без рюкзака почати роботу не вийде!`,
+                location: `• Офіс Glovo шукайте через навігатор:<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Доставщик Glovo.`
+            },
+            diver: {
+                essence: `1️⃣ Підпливайте до позначеної точки у воді.<br>2️⃣ Натисніть ЛКМ та затисніть Пробіл + W, щоб зануритися на глибину.<br>3️⃣ Біля знайденого скарбу натисніть клавішу E.<br>4️⃣ Дочекайтеся, поки буква F стане помаранчевою – артефакт успішно зібрано!`,
+                earnings: `• ⭐ 150 досвіду за успішне занурення 🎁 Випадковий предмет для продажу (вартість залежить від ціни на біржі)`,
+                reqs: `• ⚠️ У вас обов'язково не повинно бути перевантаження в інвентарі, інакше ви не зможете зануритись.`,
+                location: `• Локація: Пляж, Лівий берег Дніпра.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Водолаз.`
+            },
+            lumberjack: {
+                essence: `• <b>1 рівень (Заготівля):</b> підійдіть до дерева, затисніть ЛКМ і вчасно відпустіть на зеленому полі. Віднесіть колоди на конвеєр.<br>• <b>5 рівень (Завантаження):</b> переносьте готову деревину з конвеєра до вантажівки за допомогою клавіші ALT.<br>• <b>10 рівень (Перевезення):</b> сядьте в авто та доставте вантаж на мітку.`,
+                earnings: `• LVL 1 - Лісоруб 💵 Заробіток: 1 600 UAH⭐ Досвід: 100 EXP`,
+                reqs: `• На початкові рівні особливих вимог немає.<br>• ⚠️ Для досягнення та роботи на 10 Lvl прогресу потрібні права категорії C (Вантажівки).`,
+                location: `• Локація: Проклята Долина.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Лісоруб.`
+            },
+            sweeper: {
+                essence: `1️⃣ Почніть роботу на точці працевлаштування (автоматично перемістить у комунальне авто).<br>2️⃣ Обов’язково увімкніть подачу води клавішею <b>J</b>.<br>3️⃣ Рухайтесь чітко за мітками, не пропускаючи їх.<br>4️⃣ Після закінчення рейсу поверніться у вихідну точку, щоб заповнити бак.`,
+                earnings: `• 💵 Фіксований заробіток: 20 000 UAH за повний рейс.<br>• ⭐ Досвід: +450 EXP.`,
+                reqs: `• Наявність водійського посвідчення.<br>• Дотримання маршруту (якщо пропускати мітки, рейс не зарахується).`,
+                location: `• Місто Харків.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Очищувач вулиць.`
+            },
+            incas: {
+                essence: `• Завантажте транспорт інкасації на складі до 100%.<br>• Рухайтесь по банкоматах за вказаними мітками.<br>• При розвантаженні пройдіть міні-гру з фасування грошей (правильно розподіляйте купюри).<br>• Повністю заповніть прогрес та отримайте нагороду.`,
+                earnings: `• <b>1 рівень компанії:</b> 75 000 грн, 500 EXP, 1 бал банку.<br>• <b>2 рівень компанії:</b> 115 000 грн, 1 000 EXP, 3 бали банку.<br>• <b>3 рівень компанії:</b> 150 000 грн, 1 500 EXP, 5 балів банку.`,
+                reqs: `• Працевлаштування в інкасаторську фірму.<br>• Наявність водійського посвідченя`,
+                location: `• Офіс інкасації.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Інкасатор.`
+            },
+            solar: {
+                essence: `1️⃣ Підійдіть до сонячних панелей та натисніть клавішу ALT для старту.<br>2️⃣ Виконуйте інтерактивні дії відповідно до завдання (миття від бруду або ремонт електроніки).`,
+                earnings: `• Залежить від обраної локації:<br>— Правий берег Києва: 1 900 – 2 500 UAH<br>— Конча-Заспа: 2 700 – 3 100 UAH<br>— Лівий берег Києва: 3 300 – 3 700 UAH`,
+                reqs: `• Доступно абсолютно усім з 1-го ігрового рівня.<br>• Прогрес від миття/ремонту збільшує ваш майбутній заробіток на цій роботі.`,
+                location: `• Сонячні станції розкидані по карті (Київ, Конча-Заспа).<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Робота сонячних панелей.`
+            },
+            towtruck: {
+                essence: `• Патрулювання вулиць та обслуговування/евакуація автомобілів через взаємодію.<br>• Як обслужити авто (Меню TAB):<br>— <b>Ремонт:</b> Відкрийте TAB ➔ Наведіть на авто ➔ Оберіть значок ремонту.<br>— <b>Заправка (10 л за раз):</b> Відкрийте TAB ➔ Наведіть на авто ➔ Оберіть значок заправки.`,
+                earnings: `• 🛠️ Ремонт авто: 2 000 UAH / +30 EXP.<br>• ⛽ Заправка авто: 600 UAH / +30 EXP.`,
+                reqs: `• Доступно з 5-го ігрового рівня.<br>• Водійські права категорії B.<br>• Вартість оренди робочої машини: 2 000 гривень.`,
+                location: `• Станція евакуаторів.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Евакуатор.`
+            },
+            bus: {
+                essence: `• Рух за чітко визначеним автобусним маршрутом.<br>• Синій колір на мапі – траєкторія руху, жовті маркери – зупинки для пасажирів.<br>• Вчасно зупиняйтесь на кожній точці та чекайте посадку.`,
+                earnings: `• Гроші підсумовуються за кожну зупинку та видаються в PayDay.<br>• Виплати (Рейси 1 / 2 / 3):<br>— <b>Дніпро:</b> 850 / 1 200 / 1 700 UAH<br>— <b>Київ:</b> 700 / 900 / 1 550 UAH<br>— <b>Харків:</b> 1 600 / 3 500 / 1 600 UAH`,
+                reqs: `• Доступно з 3-го ігрового рівня.<br>• Обов'язкова наявність прав категорії D (купуються в Автошколі).`,
+                location: `• Автобусні парки у містах.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Автобусник.`
+            },
+            farm: {
+                essence: `❌ Наразі робота повністю зачинена.`,
+                earnings: `❌ Тимчасово відсутній.`,
+                reqs: `❌ Наразі недоступно.`,
+                location: `• Слідкуйте за офіційними новинами Ukraine GTA.`
+            },
+            taxi: {
+                essence: `• Прийом замовлень від реальних гравців через спеціальний робочий додаток <b>OnTaxi Driver</b>.<br>• Пасажир бачить ваші дані, кількість поїздок та обирає тип оплати (готівка чи картка).`,
+                earnings: `• Нарахування йде за кожен метр пройденого шляху:<br>💵 15 UAH за 1 метр | ⭐ 0.02 EXP за 1 метр.<br>👉 <b>Приклад (Рейс на 1 000 м):</b> 15 000 UAH та 20 EXP.`,
+                reqs: `• Доступно з 4-го ігрового рівня.<br>• Права категорії B (вартість в автошколі 3 600 грн).<br>• Робота на власному авто або оренда службового за 5 000 грн.`,
+                location: `• Диспетчерська таксі або через телефон.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Таксі.`
+            },
+            gas: {
+                essence: `• Рухайтесь за мітками на службовому авто газовщиків.<br>• На місці витоку наведіть курсор і вчасно тисніть ЛКМ для спайки труб.<br>⚠️ <b>Важливо:</b> дозволено зробити не більше 4 помилок під час міні-гри, інакше система звільнить вас!`,
+                earnings: `• 💵 1 500 UAH за одну успішну ремонтну точку.<br>• ⭐ +50 EXP досвіду.<br>• 🎁 Рандомний шанс додатково отримати <b>газовий балон</b> (використовується для крафту чи продажу гравцям).`,
+                reqs: `• Доступно з 7-го ігрового рівня.<br>• Водійські права категорії B.`,
+                location: `• Офіс газової служби.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Газова служба.`
+            },
+            builder: {
+                essence: `• <b>1 lvl (Будівельник):</b> Носіть мішки/балки (міні-гра на "E").<br>• <b>2 lvl (Перевізник):</b> Рейси з с. Калинівка до будівництва.<br>• <b>3 lvl (Бетономішалка):</b> Доставка цементу від очищувача вулиць.<br>• <b>4 lvl (Екскаваторник):</b> Робота ковшем (End - підняти, DEL - опустити, ALT - завантажити). Дублери: Num 8 / Num 2.`,
+                earnings: `• 1 lvl: Премія після 50 мішків ділиться на всіх.<br>• 2 lvl: 10 000 – 12 500 UAH / 300 - 500 EXP.<br>• 3 lvl: 20 000 – 25 000 UAH / 500 - 750 EXP.<br>• 4 lvl: 1 500 – 2 500 UAH / 100 - 300 EXP.`,
+                reqs: `• 1 lvl — з 1 рівня.<br>• 2 lvl — з 12 рівня (+ права категорії C).<br>• 3 lvl — з 18 рівня (+ права категорії C).<br>• 4 lvl — з 25 рівня (+ права категорії A).`,
+                location: `• Будівельні майданчики.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Будівельник.`
+            },
+            miner: {
+                essence: `1️⃣ На мітці руди натисніть ALT для старту.<br>2️⃣ Коли бігунок опиниться у жовтій зоні – тисніть ПКМ.<br>3️⃣ <b>Видобуток:</b> ритмічно натискайте ЛКМ на жовтій зоні. Точність впливає на фінальну вагу руди.<br>4️⃣ Віднесіть руду до вагонетки.`,
+                earnings: `• Розрахунок за формулою: Вага руди (випадково від 1 до 10 кг) × 50 UAH.<br>👉 <b>Приклад (видобуто 7 кг):</b> 7 × 50 = 350 UAH за один підхід.`,
+                reqs: `• Жодних обмежень. Доступно абсолютно кожному гравцеві з 1-го рівня.`,
+                location: `• Шахта видобутку.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Шахтар.`
+            },
+            captain: {
+                essence: `• Перевезення пасажирів на великому пароплаві.<br>• Рух відбувається суворо за водними синіми мітками-маркерами на екрані.`,
+                earnings: `• 💵 Фіксована оплата за рейс: 40 000 UAH.<br>• ⭐ Досвід: +450 EXP.`,
+                reqs: `• Потрібен високий 15-й ігровий рівень.<br>• Наявність діючих прав на водний транспорт (Морська школа: Меню O ➔ Авто ➔ Морська школа. Ціна: 135 000 грн).`,
+                location: `• Порт / Причал.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Капітан теплоходу.`
+            },
+            tram: {
+                essence: `• Керування міським трамваєм по рейках за мітками на мапі.<br>• Зупинки підсвічені жовтим кольором. Час очікування пасажирів на кожній — приблизно 15 секунд.<br>⚠️ Не пропускайте зупинки!`,
+                earnings: `• 💵 Оплата за коло: 19 000 UAH.<br>• ⭐ Досвід: +120 EXP.`,
+                reqs: `• Спеціальні права на громадський рейковий транспорт (отримуються у NPS влаштування на роботу).`,
+                location: `• Трамвайне депо.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Трамвай.`
+            },
+            thief: {
+                essence: `1️⃣ Створіть кримінальне лобі та запросіть напарника за його ігровим ID.<br>2️⃣ Зламувач підходить до замовленого авто і тисне Enter, коли квадрат стає блакитним.<br>3️⃣ Після зламу водій разом із напарником швидко відганяють авто на мітку здачі.`,
+                earnings: `• Високий нелегальний дохід, який ділиться порівну між двома учасниками пограбування після успішної доставки машини.`,
+                reqs: `• Мінімум 9-й ігровий рівень.<br>• ⚠️ <b>Обов'язково:</b> негативний (мінусовий) рейтинг соціального статусу.<br>• Наявність прав категорії B у водія + напарник.`,
+                location: `• Схованки автовикрадачів (нелегальний ринок).<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Викрадач авто.`
+            },
+            pilot: {
+                essence: `• Посадка пасажирів в аеропорту (30 сек) ➔ Очікування дозволу на злітній смузі (15 сек) ➔ Політ по великих червоних колах-маркерах у небі ➔ М'яка посадка в точці призначення.`,
+                earnings: `• Заробітня плата: 75 000 UAH / 1500 EXP`,
+                reqs: `• Наявність ліцензії пілота (Авіашкола: O ➔ GPS ➔ Важливі місця ➔ Авіашкола).<br>• Доступ до роботи починається з 20-го рівня.`,
+                location: `• Аеропорт.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Робота Пілота.`
+            },
+            loader: {
+                essence: `• Завантаження важких коробок і вантажів у фури інших гравців-далекобійників або у власну машину за мітками на складі.<br>• Кожне успішне завантаження додатково скорочує час очікування замовлення на 30 секунд.`,
+                earnings: `• 💵 Від 500 до 550 UAH за одну завантажену коробку.<br>• ⭐ +25 EXP досвіду за підхід.`,
+                reqs: `• Доступно з 1-го рівня.<br>• Потрібні права категорії A.`,
+                location: `• Головний товарний склад.<br>🧭 Меню O ➔ GPS ➔ Роботи ➔ Навантажувач.`
+            }
+        };
 
-<script>
-// Таблиця балів та лімітів
-const incassatorData = {
-    0: { pointsRequired: 30, limit: "5 000 000" },
-    1: { pointsRequired: 60, limit: "10 000 000" },
-    2: { pointsRequired: 120, limit: "15 000 000" },
-    3: { pointsRequired: 180, limit: "20 000 000" },
-    4: { pointsRequired: 240, limit: "25 000 000" },
-    5: { pointsRequired: 360, limit: "30 000 000" },
-    6: { pointsRequired: 500, limit: "35 000 000" },
-    7: { pointsRequired: 650, limit: "40 000 000" },
-    8: { pointsRequired: 800, limit: "50 000 000" },
-    9: { pointsRequired: 1000, limit: "60 000 000" },
-    10: { pointsRequired: 0, limit: "75 000 000" }
-};
+        let currentSelectedJob = ""; // Змінна для збереження поточної обраної роботи
 
-// Ініціалізація вибору рівнів при завантаженні сторінки
-updateTargetOptions();
+        // Викликається, коли користувач обирає роботу з випадаючого списку
+        function onJobSelected() {
+            const selector = document.getElementById("jobSelector");
+            currentSelectedJob = selector.value;
 
-function switchTab(tabName, btn) {
-    document.querySelectorAll(".menu-btn").forEach(x => x.classList.remove("active"));
-    document.querySelectorAll(".card").forEach(x => x.classList.remove("active-card"));
-    btn.classList.add("active");
+            if (jobsDatabase[currentSelectedJob]) {
+                // Показуємо блок кнопок
+                document.getElementById("job-tabs-block").style.display = "grid";
+                // Активуємо першу вкладку автоматично (Суть роботи)
+                switchJobInfo('essence');
+            } else {
+                document.getElementById("job-tabs-block").style.display = "none";
+                document.getElementById("job-details").style.display = "none";
+            }
+        }
 
-    if (tabName === 'deposit') {
-        document.getElementById("deposit-card").classList.add("active-card");
-    } else if (tabName === 'incassator') {
-        document.getElementById("incassator-card").classList.add("active-card");
-    } else {
-        document.getElementById("dev-card").classList.add("active-card");
-    }
-}
+        // Функція перемикання внутрішніх інформаційних кнопок
+        function switchJobInfo(type) {
+            if (!currentSelectedJob || !jobsDatabase[currentSelectedJob]) return;
 
-// Функція оновлення вибору бажаного рівня (лише назва рівня без лімітів)
-function updateTargetOptions() {
-    const currentLvl = parseInt(document.getElementById("currentLevel").value);
-    const targetSelect = document.getElementById("targetLevel");
-    targetSelect.innerHTML = "";
+            // Знімаємо активний клас з усіх під-кнопок
+            document.querySelectorAll(".job-sub-btn").forEach(btn => btn.classList.remove("active-sub-tab"));
 
-    for (let i = currentLvl + 1; i <= 10; i++) {
-        let opt = document.createElement("option");
-        opt.value = i;
-        opt.innerText = `${i} рівень`;
-        targetSelect.appendChild(opt);
-    }
-}
+            // Додаємо активний клас натиснутій кнопці
+            if (type === 'essence') document.getElementById("btn-essence").classList.add("active-sub-tab");
+            if (type === 'earnings') document.getElementById("btn-earnings").classList.add("active-sub-tab");
+            if (type === 'reqs') document.getElementById("btn-reqs").classList.add("active-sub-tab");
+            if (type === 'location') document.getElementById("btn-location").classList.add("active-sub-tab");
 
-// РОЗРАХУНОК ДЕПОЗИТУ
-function calculateDeposit() {
-    let amount = Number(document.getElementById("amount").value);
-    let error = document.getElementById("deposit-error");
-    let result = document.getElementById("deposit-result");
+            // Формуємо та виводимо контент
+            const detailsDiv = document.getElementById("job-details");
+            let titleText = "";
+            if (type === 'essence') titleText = "🎮 Суть роботи";
+            if (type === 'earnings') titleText = "💰 Заробіток та бонуси";
+            if (type === 'reqs') titleText = "📋 Вимоги та умови";
+            if (type === 'location') titleText = "📍 Локація / Шлях";
 
-    error.style.display = "none";
-    result.style.display = "none";
+            detailsDiv.innerHTML = `
+                <div class="job-section">
+                    <div class="job-section-title">${titleText}</div>
+                    <p>${jobsDatabase[currentSelectedJob][type]}</p>
+                </div>
+            `;
+            detailsDiv.style.display = "block";
+        }
 
-    if (amount < 1) {
-        error.innerText = "Мінімальна сума: 1₴";
-        error.style.display = "block";
-        return;
-    }
-    if (amount > 5000000) {
-        error.innerText = "Максимальна сума: 5 000 000₴";
-        error.style.display = "block";
-        return;
-    }
+        // Функція перемикання головних вкладок меню (Калькулятори / Роботи)
+        function switchTab(tabName, btn) {
+            document.querySelectorAll(".menu-btn").forEach(x => x.classList.remove("active"));
+            document.querySelectorAll(".card").forEach(x => {
+    x.style.opacity = "0";
+    x.style.transform = "translateY(10px)";
+    x.classList.remove("active-card");
+});
 
-    let data = document.getElementById("payday").value.split("|");
-    let basePercent = Number(data[0]);
-    let payday = Number(data[1]);
-    let bankBonus = Number(document.getElementById("bankLevel").value);
+setTimeout(() => {
+    let active = document.getElementById(tabName + "-card");
+    active.classList.add("active-card");
+    active.style.opacity = "1";
+    active.style.transform = "translateY(0)";
+}, 120);
+            btn.classList.add("active");
 
-    let finalPercent = basePercent * (1 + bankBonus / 100);
-    let final = amount * Math.pow(1 + (finalPercent / 100), payday);
-    let profit = final - amount;
+            if (tabName === 'deposit') {
+                document.getElementById("deposit-card").classList.add("active-card");
+            } else if (tabName === 'incassator') {
+                document.getElementById("incassator-card").classList.add("active-card");
+            } else if (tabName === 'jobs') {
+                document.getElementById("jobs-card").classList.add("active-card");
+            } else {
+                document.getElementById("dev-card").classList.add("active-card");
+            }
+        }
 
-    result.innerHTML = `
-        <div class="result-box">
-            <div class="result-item"><span>💰 Початкова сума</span><b>${amount.toLocaleString()}₴</b></div>
-            <div class="result-item"><span>📊 Бонус рівня банку</span><b>+${bankBonus}%</b></div>
-            <div class="result-item"><span>📈 Чистий прибуток</span><b>+${Math.round(profit).toLocaleString()}₴</b></div>
-            <div class="result-main"><span>🏦 Через ${payday} PayDay:</span><b>${Math.round(final).toLocaleString()}₴</b></div>
-        </div>
-    `;
-    result.style.display = "block";
-}
+        // Функція оновлення вибору бажаного рівня інкасатора
+        function updateTargetOptions() {
+            const currentLvl = parseInt(document.getElementById("currentLevel").value);
+            const targetSelect = document.getElementById("targetLevel");
+            targetSelect.innerHTML = "";
 
-// РОЗРАХУНОК ІНКАСАТОРА
-function calculateIncassator() {
-    const currentLvl = parseInt(document.getElementById("currentLevel").value);
-    const currentPoints = parseInt(document.getElementById("currentPoints").value) || 0;
-    const targetLvl = parseInt(document.getElementById("targetLevel").value);
-    const pointsPerRun = parseInt(document.getElementById("companyLevel").value);
+            for (let i = currentLvl + 1; i <= 10; i++) {
+                let opt = document.createElement("option");
+                opt.value = i;
+                opt.innerText = `${i} рівень`;
+                targetSelect.appendChild(opt);
+            }
+        }
 
-    const error = document.getElementById("incassator-error");
-    const result = document.getElementById("incassator-result");
+        // РОЗРАХУНОК ДЕПОЗИТУ
+        function calculateDeposit() {
+            
+            let amount = Number(document.getElementById("amount").value);
+            let error = document.getElementById("deposit-error");
+            let result = document.getElementById("deposit-result");
 
-    error.style.display = "none";
-    result.style.display = "none";
+            error.style.display = "none";
+            result.style.display = "none";
 
-    // Валідація наявних балів на поточному рівні
-    const maxPointsForCurrentLvl = incassatorData[currentLvl].pointsRequired;
-    if (currentPoints < 0) {
-        error.innerText = "Кількість балів не може бути меншою за 0";
-        error.style.display = "block";
-        return;
-    }
-    if (currentPoints >= maxPointsForCurrentLvl && currentLvl < 10) {
-        error.innerText = `На ${currentLvl} рівні не може бути більше ніж ${maxPointsForCurrentLvl - 1} балів (при ${maxPointsForCurrentLvl} балах рівень підвищується автоматично)`;
-        error.style.display = "block";
-        return;
-    }
+            if (amount < 1) {
+                error.innerText = "Мінімальна сума: 1₴";
+                error.style.display = "block";
+                return;
+            }
+            if (amount > 5000000) {
+                error.innerText = "Максимальна сума: 5 000 000₴";
+                error.style.display = "block";
+                return;
+            }
 
-    // Розрахунок балів, які потрібно набрати з урахуванням обнулення
-    let totalPointsNeeded = 0;
-    
-    // Скільки залишилося добити на поточному рівні
-    totalPointsNeeded += (maxPointsForCurrentLvl - currentPoints);
+            let data = document.getElementById("payday").value.split("|");
+            let basePercent = Number(data[0]);
+            let payday = Number(data[1]);
+            let bankBonus = Number(document.getElementById("bankLevel").value);
 
-    // Додаємо повну вартість прокачки для всіх наступних рівнів до цілі
-    for (let i = currentLvl + 1; i < targetLvl; i++) {
-        totalPointsNeeded += incassatorData[i].pointsRequired;
-    }
+            let finalPercent = basePercent * (1 + bankBonus / 100);
+            let final = amount * Math.pow(1 + (finalPercent / 100), payday);
+            let profit = final - amount;
 
-    // Розрахунок потрібної кількості рейсів з округленням вгору
-    let runsRequired = Math.ceil(totalPointsNeeded / pointsPerRun);
+            result.innerHTML = `
+                <div class="result-box">
+                    <div class="result-item"><span>💰 Початкова сума</span><b>${amount.toLocaleString()}₴</b></div>
+                    <div class="result-item"><span>📊 Бонус рівня банку</span><b>+${bankBonus}%</b></div>
+                    <div class="result-item"><span>📈 Чистий прибуток</span><b>+${Math.round(profit).toLocaleString()}₴</b></div>
+                    <div class="result-main"><span>🏦 Через ${payday} PayDay:</span><b>${Math.round(final).toLocaleString()}₴</b></div>
+                </div>
+            `;
+            result.style.display = "block";
+setTimeout(() => result.classList.add("show"), 10);
+        }
 
-    result.innerHTML = `
-        <div class="result-box">
-            <div class="result-item">
-                <span>🎯 Цільовий рівень банкінгу</span>
-                <b>${targetLvl} lvl</b>
-            </div>
-            <div class="result-item">
-                <span>💳 Новий ліміт (грн/од)</span>
-                <b>${incassatorData[targetLvl].limit} ₴</b>
-            </div>
-            <div class="result-item">
-                <span>📈 Всього потрібно балів</span>
-                <b>${totalPointsNeeded} балів</b>
-            </div>
-            <div class="result-main">
-                <span>🚚 Потрібно виконати рейсів</span>
-                <b>${runsRequired} рейсів</b>
-            </div>
-        </div>
-    `;
-    result.style.display = "block";
-}
-</script>
+        // РОЗРАХУНОК ІНКАСАТОРА
+        function calculateIncassator() {
+            const currentLvl = parseInt(document.getElementById("currentLevel").value);
+            const currentPoints = parseInt(document.getElementById("currentPoints").value) || 0;
+            const targetLvl = parseInt(document.getElementById("targetLevel").value);
+            const pointsPerRun = parseInt(document.getElementById("companyLevel").value);
+
+            const error = document.getElementById("incassator-error");
+            const result = document.getElementById("incassator-result");
+
+            error.style.display = "none";
+            result.style.display = "none";
+
+            const maxPointsForCurrentLvl = incassatorData[currentLvl].pointsRequired;
+            if (currentPoints < 0) {
+                error.innerText = "Кількість балів не може бути меншою за 0";
+                error.style.display = "block";
+                return;
+            }
+            if (currentPoints >= maxPointsForCurrentLvl && currentLvl < 10) {
+                error.innerText = `На ${currentLvl} рівні не може бути більше ніж ${maxPointsForCurrentLvl - 1} балів (при ${maxPointsForCurrentLvl} балах рівень підвищується автоматично)`;
+                error.style.display = "block";
+                return;
+            }
+
+            let totalPointsNeeded = 0;
+            totalPointsNeeded += (maxPointsForCurrentLvl - currentPoints);
+
+            for (let i = currentLvl + 1; i < targetLvl; i++) {
+                totalPointsNeeded += incassatorData[i].pointsRequired;
+            }
+
+            let runsRequired = Math.ceil(totalPointsNeeded / pointsPerRun);
+
+            result.innerHTML = `
+                <div class="result-box">
+                    <div class="result-item">
+                        <span>🎯 Цільовий рівень банкінгу</span>
+                        <b>${targetLvl} lvl</b>
+                    </div>
+                    <div class="result-item">
+                        <span>💳 Новий ліміт (грн/од)</span>
+                        <b>${incassatorData[targetLvl].limit} ₴</b>
+                    </div>
+                    <div class="result-item">
+                        <span>📈 Всього потрібно балів</span>
+                        <b>${totalPointsNeeded} балів</b>
+                    </div>
+                    <div class="result-main">
+                        <span>🚚 Потрібно виконати рейсів</span>
+                        <b>${runsRequired} рейсів</b>
+                    </div>
+                </div>
+            `;
+            result.style.display = "block";
+setTimeout(() => result.classList.add("show"), 10);
+        }
+
+        // Ініціалізація вибору рівнів при завантаженні сторінки
+        updateTargetOptions();
+    </script>
 
 </body>
 </html>
