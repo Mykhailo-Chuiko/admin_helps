@@ -239,16 +239,25 @@ option {
         }
 
         .job-info-container {
-            background: rgba(255, 255, 255, 0.04);
-            padding: 18px;
-            border-radius: 14px;
-            min-height: 100px;
-            max-height: 320px;
-            overflow-y: auto;
-            font-size: 14px;
-            line-height: 1.6;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+    background: rgba(255, 255, 255, 0.04);
+    padding: 18px;
+    border-radius: 14px;
+    min-height: 100px;
+    max-height: 320px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.6;
+    border: 1px solid rgba(255,255,255,.05);
+
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all .35s ease;
+}
+
+.job-info-container.show {
+    opacity: 1;
+    transform: translateY(0);
+}
 
         .job-section-title {
             font-weight: bold;
@@ -732,33 +741,62 @@ option {
 
         // Функція перемикання внутрішніх інформаційних кнопок
         function switchJobInfo(type) {
-            if (!currentSelectedJob || !jobsDatabase[currentSelectedJob]) return;
+    if (!currentSelectedJob || !jobsDatabase[currentSelectedJob]) return;
 
-            // Знімаємо активний клас з усіх під-кнопок
-            document.querySelectorAll(".job-sub-btn").forEach(btn => btn.classList.remove("active-sub-tab"));
+    // Прибираємо активність у всіх кнопок
+    document.querySelectorAll(".job-sub-btn")
+    .forEach(btn => btn.classList.remove("active-sub-tab"));
 
-            // Додаємо активний клас натиснутій кнопці
-            if (type === 'essence') document.getElementById("btn-essence").classList.add("active-sub-tab");
-            if (type === 'earnings') document.getElementById("btn-earnings").classList.add("active-sub-tab");
-            if (type === 'reqs') document.getElementById("btn-reqs").classList.add("active-sub-tab");
-            if (type === 'location') document.getElementById("btn-location").classList.add("active-sub-tab");
+    // Активна кнопка
+    if(type==='essence')
+        document.getElementById("btn-essence").classList.add("active-sub-tab");
 
-            // Формуємо та виводимо контент
-            const detailsDiv = document.getElementById("job-details");
-            let titleText = "";
-            if (type === 'essence') titleText = "🎮 Суть роботи";
-            if (type === 'earnings') titleText = "💰 Заробіток та бонуси";
-            if (type === 'reqs') titleText = "📋 Вимоги та умови";
-            if (type === 'location') titleText = "📍 Локація / Шлях";
+    if(type==='earnings')
+        document.getElementById("btn-earnings").classList.add("active-sub-tab");
 
-            detailsDiv.innerHTML = `
-                <div class="job-section">
-                    <div class="job-section-title">${titleText}</div>
-                    <p>${jobsDatabase[currentSelectedJob][type]}</p>
-                </div>
-            `;
-            detailsDiv.style.display = "block";
-        }
+    if(type==='reqs')
+        document.getElementById("btn-reqs").classList.add("active-sub-tab");
+
+    if(type==='location')
+        document.getElementById("btn-location").classList.add("active-sub-tab");
+
+    // Заголовки
+    let titleText="";
+
+    if(type==='essence')
+        titleText="🎮 Суть роботи";
+
+    if(type==='earnings')
+        titleText="💰 Заробіток та бонуси";
+
+    if(type==='reqs')
+        titleText="📋 Вимоги та умови";
+
+    if(type==='location')
+        titleText="📍 Локація / Шлях";
+
+    const detailsDiv=document.getElementById("job-details");
+
+    // Приховуємо перед зміною
+    detailsDiv.classList.remove("show");
+
+    setTimeout(()=>{
+
+        detailsDiv.innerHTML=`
+        <div class="job-section">
+            <div class="job-section-title">${titleText}</div>
+            <p>${jobsDatabase[currentSelectedJob][type]}</p>
+        </div>
+        `;
+
+        detailsDiv.style.display="block";
+
+        setTimeout(()=>{
+            detailsDiv.classList.add("show");
+        },10);
+
+    },150);
+}
 
         // Функція перемикання головних вкладок меню (Калькулятори / Роботи)
         function switchTab(tabName, btn) {
